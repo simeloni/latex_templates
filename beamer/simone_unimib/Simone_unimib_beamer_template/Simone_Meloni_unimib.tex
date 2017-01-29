@@ -1,0 +1,1123 @@
+\documentclass[9pt, xcolor=dvipsnames]{beamer}
+\usetheme{Boadilla}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{eso-pic}
+\usepackage{framed}
+\usepackage{fancyvrb}
+\usepackage{graphicx}
+\usepackage{color}
+
+
+%===============LINE FOR TITLES=================
+\usepackage{tikz}
+\usetikzlibrary{shapes.arrows, fadings}
+\newcommand{\topline}{%
+	\tikzfading[name=fade left, right color = transparent!0, left color=transparent!100]
+	\tikz[remember picture, overlay] {%
+	\fill[Periwinkle, path fading=fade left] ([yshift=-1cm]current page.north west) rectangle ([yshift=-1.15cm, xshift=\paperwidth]current page.north west);
+			% -- ([yshift=-1cm, xshift=\paperwidth]current %page.north west);}}
+			}}
+\newcommand{\backupbegin}{
+  \newcounter{finalframe}
+   \setcounter{finalframe}{\value{framenumber}}
+}
+\newcommand{\backupend}{
+   \setcounter{framenumber}{\value{finalframe}}
+}
+
+%===============ENUMERATION STYLE===============
+\setbeamertemplate{itemize item}[circle]
+
+
+%================COLORS=========================
+
+\definecolor{SimoneWarmGreyDark}{rgb}{0.274509804,0.254901961, 0.235294118}
+
+\setbeamercolor{normal text}{fg=SimoneWarmGreyDark}
+
+%====================TITLE PAGE=================
+\def\titlepage{\usebeamertemplate{titlepage}}
+\setbeamertemplate{titlepage}
+{
+	% Add background to title page
+	\AddToShipoutPictureFG*{\includegraphics[width=\paperwidth]{images/Sigillo_background.png}}
+
+	\begin{minipage}[t][\paperheight]{\textwidth}
+		\begin{minipage}[b][0.15\paperheight]{0.4\textwidth}
+	\vspace*{10mm}
+	\begin{columns}
+	\begin{column}{0.3\textwidth}
+	\includegraphics[height=14mm]{images/Sigillo.jpg}\par
+	\end{column}
+	\begin{column}{0.5\textwidth}
+	\ifx\insertinstitut\@empty%
+	\else%
+		\vspace*{3mm}
+		{\usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute\par}%
+	\fi% 
+	\end{column}
+	\end{columns}
+	\end{minipage}
+	
+	\vspace*{5mm}
+	\ifx\insertsubtitle\@empty%
+	\else%
+		{\usebeamerfont{title}\usebeamercolor[fg]{title}\MakeUppercase{\inserttitle}\par}%
+	\fi%
+	\ifx\insertsubtitle\@empty%
+	\else%
+		{\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+		\vspace*{5mm}
+	\fi%
+	\ifx\insertdate\@empty%
+	\else%
+		{\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate\par}%
+	\fi% 
+	\vspace*{10mm}
+	\begin{tabular}{cc}
+	\noindent
+	\textbf{Supervisors:} & Mark Whitehead\\
+						  & Conor Fitzpatrick
+	\end{tabular}
+	\vfill
+	
+	\ifx\insertauthor\@empty%
+	\else%
+		{\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\par}%
+	\fi%
+	s.meloni1@campus.unimib.it
+	\vspace*{5mm}
+	
+\end{minipage}
+}
+
+
+\title{Titolo}
+\subtitle{Sottotitolo}
+\author{\textbf{Simone Meloni}}
+\institute{\par \textbf{Milano Bicocca} University}
+\date{August 30, 2016}
+
+
+
+
+
+
+
+\begin{document}
+
+\begin{frame}[plain]
+\titlepage
+\end{frame}
+
+%\begin{frame}
+%\tableofcontents
+%\end{frame}
+
+\begin{frame}{About Myself}
+\topline
+
+\end{frame}
+
+\begin{frame}{Trigger Upgrade}
+\topline
+	\begin{columns}
+	\begin{column}{0.5\textwidth}
+		\begin{centering}
+	     \includegraphics[scale = 0.45]{images/Upgraded_trigger.png}
+		\end{centering}
+	\end{column}
+	\begin{column}{0.5\textwidth}
+		\begin{itemize}
+	 	\item Run3 configuration : 
+	 		\begin{itemize}
+	 		 \item L = $2 x 10^{33}cm^{-2} s^{-1} $ 
+	 		 \item Online Calibration
+	 	 	 \item Full Software Trigger
+	 		\end{itemize}
+		\end{itemize}
+		
+		\begin{itemize}
+	  	 \item The Full Software trigger will process the full inelastic collision rate.
+		\end{itemize}
+		
+		\begin{itemize}
+			\item \textbf{Challenge:} How do we distribute the limited bandwidth to disk across the LHCb physics programme?		
+			\end{itemize}
+	\end{column}
+	
+	
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Bandwidth division in the charm sector}
+\topline
+\begin{itemize}
+\item \textbf{My work}: Develop a framework to allow trigger selections to be adjusted in order to distribute the available bandwidth
+
+\begin{itemize}
+ \item Study of the physics potential as a function of the output bandwidth.
+\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+ \item Focus on the \textbf{charm sector}, and in particular:
+ \begin{columns}
+			\begin{column}{0.5 \textwidth}
+			\begin{center}
+			
+			\begin{itemize}
+			 \item[] $D^{+}\rightarrow K^+K^-\pi^{+}$
+			 \item[] $D^{0}\rightarrow K^+K^-$
+			 \item[] $D^{0}\rightarrow K^+K^-\pi^{+}\pi^{-}$
+			 \item[] $D^{0}\rightarrow K^0_S\pi^{+}\pi^{-}$
+			\end{itemize}
+			\end{center}
+			\end{column}
+			
+			\begin{column}{0.5 \textwidth}
+			\item[] where the $D^0$ comes from $D^{+*}\rightarrow D^{0} \pi^{+}$
+			\end{column}
+			\end{columns}
+\end{itemize}
+
+\begin{itemize}
+\item Using latest Upgrade MC signal and minbias samples with the upgrade reconstruction sequence
+\begin{itemize}
+	\item A big thank to Mark Whitehead and Agnieszka Dziurda
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Idea}
+\topline
+	\begin{itemize}
+	\item Single dial for each channel (or analysis) that tunes the bandwidth used!
+	\end{itemize}
+	
+	\begin{itemize}
+	\item \textbf{For example}$\longrightarrow$ output of a continuous classifier 
+	\end{itemize}
+	
+	\begin{itemize}
+	\item First part of the project: Train an MVA for each channel
+	\begin{itemize}
+		\item I have written a \texttt{Python} code that performs binary classification
+	\end{itemize}
+	
+	\begin{itemize}
+		\item Analysts can use this code to train their own MVA 
+	\end{itemize}
+	\end{itemize}
+
+	\begin{columns}
+	\begin{column}{0.7\textwidth}
+	\begin{framed}
+	\begin{figure}
+	\centering
+	\includegraphics[scale=0.3]{images/SMVA_docu.png}
+	
+	\end{figure}
+	\end{framed}
+	\end{column}
+	
+	\begin{column}{0.3\textwidth}
+	\begin{figure}
+	\includegraphics[scale=0.2]{images/scikit-learn.png}
+	\end{figure}
+	\begin{center}
+	 Code and Documentation available at \texttt{https://gitlab.com/\\simeloni/SMVA}
+	\end{center}
+	\end{column}
+	\end{columns}
+	
+\end{frame}
+
+\begin{frame}{SMVA}
+\topline
+\begin{itemize}
+\item Performs binary classification (i.e. signal vs background separation)
+\end{itemize}
+
+\begin{itemize}
+\item Produces \textit{TMVA-Like} Plots in an automized way. Simple to use:
+\end{itemize}
+
+\begin{columns}
+\begin{column}{0.40\textwidth}
+\begin{center}
+\begin{framed}
+\begin{framed}
+\texttt{inputfile.py}
+\end{framed}
+\begin{itemize}
+	\item file paths
+	\item Preselections
+	\item MVA and training var's
+\end{itemize}
+\end{framed}
+\end{center}
+\end{column}
+
+\begin{column}{0.20\textwidth}
+%\begin{columns}
+%\begin{column}{0.33\textwidth}
+%\begin{center}
+%$\longrightarrow$
+%\end{center}
+%\end{column}
+
+%\begin{column}{0.33\textwidth}
+%\begin{figure}
+%\begin{flushleft}
+%\includegraphics[scale=0.23]{images/Brain_Train.jpeg}
+%\end{flushleft}
+%\end{figure}
+%\end{column}
+
+%\begin{column}{0.33\textwidth}
+%\begin{center}
+%$\longrightarrow$
+%\end{center}
+%\end{column}
+%\end{columns}
+
+\begin{figure}
+\begin{flushleft}
+\includegraphics[scale=0.23]{images/Brain_Train.jpeg}
+\end{flushleft}
+\end{figure}
+
+\begin{center}
+$\Longrightarrow$
+\end{center}
+\end{column}
+
+\begin{column}{0.40\textwidth}
+\begin{figure}
+\includegraphics[scale=0.19]{images/MVA_root_output.png}
+\end{figure}
+\end{column}
+\end{columns}
+
+\begin{itemize}
+\item Options available to enable specific Plots and features
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{minipage}{1.0\textwidth}
+	
+	
+	\begin{minipage}{0.47\textwidth}
+	\begin{framed}
+		\tiny\texttt{--MakeROC}
+		%\begin{figure}
+		\includegraphics[scale=0.22]{images/ROC_curve_only_AdaBoost.pdf}
+		%\end{figure}
+	\end{framed}
+	\end{minipage}	
+	\begin{minipage}{0.47\textwidth}
+	\begin{framed}	
+		\tiny\texttt{--CompareTrainTest}
+		%\begin{figure}
+		\includegraphics[scale=0.22]{images/overtraining_check.pdf}
+		%\end{figure}
+	\end{framed}
+	\end{minipage}
+	
+	\begin{minipage}{0.47\textwidth}
+	\begin{framed}
+		
+		\tiny\texttt{--ComparePerformances}
+		\includegraphics[scale=0.22]{images/MVA_comparison.pdf}
+	\end{framed}
+	\end{minipage}	
+	\begin{minipage}{0.47\textwidth}
+	\begin{framed}
+		\tiny\texttt{--MakePlots}
+		%\begin{figure}
+		\includegraphics[scale=0.22]{images/eff_vs_ret.pdf}
+		%\end{figure}
+	\end{framed}
+	\end{minipage}
+	
+\end{minipage}
+
+
+
+
+\end{frame}
+
+
+
+
+\begin{frame}{Bandwidth division algorithm}
+\topline
+\begin{itemize}
+\item \textbf{Idea:} use the single dial to find the right MVA selection for all the channels to \textcolor{blue}{fit into the Bandwidth limit} \textcolor{red}{maximizing the total signal efficiency}
+\end{itemize}
+
+\begin{itemize}
+	\item \textbf{Algorithm:} minimize this function...
+\end{itemize}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{equation*}
+		\chi^2 = \sum_{channels} \left(1-\dfrac{\textcolor{red}{\epsilon_s}}{\textcolor{red}{\epsilon_{max}}}\right)^2
+\end{equation*}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{equation*}
+		\epsilon_s = \dfrac{N(truth, presel., MVAsel.)}{N(truth)}
+		\end{equation*}
+\end{column}
+\end{columns}
+
+\begin{itemize}
+  	\item[] $\epsilon_{max}$ $=$ maximum efficiency affordable for a single channel providing it with the maximum bandwidth.
+   \end{itemize}
+
+\begin{center}
+...multiplying the efficiency by a penalty factor whenever $BW > BW_{limit}$
+\end{center}
+
+\begin{center}
+		\textcolor{blue}{penalty} $ = \dfrac{BW_{limit}}{BW}$ 
+	\end{center}
+
+
+\end{frame}
+
+\begin{frame}{Bandwidth division algorithm}
+\topline
+\begin{itemize}
+ \item \textbf{first iteration:} For each channel independently minimize this function
+\end{itemize}
+
+	\begin{equation*}
+		\tilde{\chi}^2 = (1-\epsilon_{max})^2
+	\end{equation*}
+
+	the cut found by the minimizer gives you $\epsilon_{max}$
+	
+\begin{itemize}
+\item \textbf{second iteration:} use the $\epsilon_{max}$ found to construct the $\chi^2$ and minimize it.
+\end{itemize}
+
+	\begin{equation*}
+		\chi^2 = \sum_{channels} \left(1-\dfrac{\epsilon}{\epsilon_{max}}\right)^2
+	\end{equation*}
+	
+\begin{itemize}
+	\item \textbf{OUTPUT:} A set of cuts with which we can evaluate the signal efficiencies, output Bandwidth and Rate for each of the channels
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Bandwidth division output}
+\topline
+\begin{itemize}
+\item Example of an output graph for the bandwidth division tool
+\end{itemize}
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{itemize}
+	\item[]{\includegraphics[scale=0.2]{images/bwdiv_legend_red.png}} At the first iteration, minimizing
+\end{itemize}
+\begin{small}
+\begin{equation*}
+		\tilde{\chi}^2 = \left(1-\epsilon_{max}\right)^2
+\end{equation*}
+\end{small}
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\begin{itemize}
+	\item[]{\includegraphics[scale=0.2]{images/bwdiv_legend_blu.png}} At the second iteration, minimizing
+\end{itemize}
+\begin{small}
+\begin{equation*}
+		\chi^2 = \sum_{channels} \left(1-\dfrac{\epsilon_s}{\epsilon_{max}}\right)^2
+\end{equation*}
+\end{small}
+\end{column}
+\end{columns}
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{figure}
+\includegraphics[scale=0.33]{images/60MB_NO_TURBO/MinbiasBandwidth.eps}
+\end{figure}
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\begin{itemize}
+\item Assuming a  \textbf{Bandwidth limit of 60 MB/s} and an event size for each of the channels: 
+\end{itemize}
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline 
+& \small event Size [kB/evt]\\
+\hline
+\small$D^{+}\rightarrow K^+K^-\pi^{+}$ & 14\\
+\small$D^{0}\rightarrow K^+K^-$ & 12\\
+\small$D^{0}\rightarrow K^+K^-\pi^{+}\pi^{-}$ & 14 \\
+\small$D^{0}\rightarrow K^0_S\pi^{+}\pi^{-}$ & 70\\
+\hline
+\end{tabular}
+\end{center}
+
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Event Size in the bandwidth division}
+\topline
+\begin{itemize}
+\item The way in which the events are saved affects the bandwidth division:
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{|cccc|}
+\hline 
+$D^{+}\to K^+K^-\pi^{+}$ & $D^{+}\to K^+K^-\pi^{+}$&
+$D^{0}\to K^+K^-$ &
+$D^{0}\to K^0_S\pi^{+}\pi^{-}$\\
+\hline
+&&&\\
+14 kB/evt. & 12 kB/evt. & 14 kB/evt. & \textcolor{red}{70 kB/evt.}\\
+&&&\\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{figure}
+\includegraphics[scale=0.32]{images/60MB_NO_TURBO/MinbiasRate.eps}
+\end{figure}
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\begin{itemize}
+		\item The bigger the event size (for a given bandwidth), the harder the MVA cut
+		\begin{itemize}
+		\item Channels with bigger event size get less rate because the MVA has to cut harder in order to fit them inside the Bandwith limit
+		\end{itemize}
+\end{itemize}
+\end{column}
+\end{columns}
+
+
+
+\end{frame}
+
+\begin{frame}{Event Size in the bandwidth division}
+\topline
+\begin{itemize}
+\item The way in which the events are saved affects the bandwidth division:
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{|cccc|}
+\hline 
+$D^{+}\to K^+K^-\pi^{+}$ & $D^{+}\to K^+K^-\pi^{+}$&
+$D^{0}\to K^+K^-$ &
+$D^{0}\to K^0_S\pi^{+}\pi^{-}$\\
+\hline
+&&&\\
+14 kB/evt. & 12 kB/evt. & 14 kB/evt. & \textcolor{red}{14 kB/evt.}\\
+&&&\\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{figure}
+\includegraphics[scale=0.32]{images/60MB_TURBO/MinbiasRate.eps}
+\end{figure}
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\begin{itemize}
+		\item The bigger the event size (for a given bandwidth), the harder the MVA cut
+		\begin{itemize}
+		\item Channels with bigger event size get less rate because the MVA has to cut harder in order to fit them inside the Bandwith limit
+		\end{itemize}
+\end{itemize}
+\end{column}
+\end{columns}
+
+
+
+\end{frame}
+
+\begin{frame}{Bandwidth Scans}
+\topline
+\begin{itemize}
+\item How does the division vary with the available bandwidth?
+\item Bandwidth scans can be obtained running the same algorithm for different limits scenarios
+\end{itemize}
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{center}
+\small\textbf{$D^{0}\to K^0_S\pi^+\pi^-$}(70 kB/evt.)
+\end{center}
+\begin{figure}
+\includegraphics[scale=0.3]{images/projection_plots/NO_TURBO/Signal_Eff.eps}
+\end{figure}
+\end{column}
+
+
+\begin{column}{0.5\textwidth}
+\begin{center}
+\small\textbf{$D^{0}\to K^0_S\pi^+\pi^-$}(14 kB/evt.) 
+\end{center}
+\begin{figure}
+\includegraphics[scale=0.3]{images/projection_plots/TURBO/Signal_Eff.eps}
+\end{figure}
+\end{column}
+\end{columns}
+
+\begin{itemize}
+\item Big enhancement in the Signal Efficiency for the line that turned to Turbo Stream
+\end{itemize}
+
+\begin{itemize}
+\item If we turn one of the lines from Turbo to Non-Turbo stream, the other lines aren't badly affected!
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Conclusions}
+\topline
+
+\begin{center}
+ With the tools I have developed analysts can provide HLT2 selections that can be adjusted in a controlled manner to fit within the upgrade Bandwidth. The tools consist of two stages:
+\end{center}
+
+\begin{itemize}
+	\item \textbf{First stage:} MVA training using \texttt{Scikit Learn}
+	\begin{itemize}
+		\item Developed an agile \texttt{Python} script to automate the production of \textit{TMVA-like} plots
+	\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\item \textbf{Second stage:} Used the MVA output to perform the bandwidth division in the charm sector with the upgraded conditions
+\begin{itemize}
+	\item Implemented a quantitative way to divide the bandwidth amongst the physics channels
+	\item Performed some Projections in different output bandwidth scenarios
+\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\item \textbf{Next goal:} use this tool to extraploate to the entire charm programme and outline the expected bandwidth available for each channel in the upgrade conditions.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+
+\begin{center}
+	\textbf{THANK YOU FOR YOUR ATTENTION!}
+\end{center}
+\end{frame}
+
+\backupbegin
+\begin{frame}
+\begin{center}
+BACKUP
+\end{center}
+\end{frame}
+
+\begin{frame}{Bandwidth division}
+\topline
+\begin{itemize}
+	\item The important plot for the bandwidth division tool is the signal efficiency versus the Output Bandwidth
+\end{itemize}
+
+\begin{columns}
+	\begin{column}{0.5\textwidth}
+		\begin{equation*}
+		\epsilon_s = \dfrac{N(truth, presel., MVAsel.)}{N(truth)}
+		\end{equation*}
+		 
+		\begin{equation*}
+		Bandwidth = \epsilon_{minbias} \times R_{minbias} \times Evt. Size
+\end{equation*}
+		
+	\end{column}
+	\begin{column}{0.5\textwidth}
+	\begin{figure}
+		\includegraphics[scale=0.25]{images/eff_vs_ret.pdf}
+	\end{figure}
+	\end{column}
+\end{columns}
+
+\begin{itemize}
+	\item Preselection = (Loose) HLT2 selections (Thanks to Mark Williams)
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{|c|cccc|}
+\hline 
+&\textbf{D2KKpi} & \textbf{D2KK} &\textbf{D2KKpipi} & \textbf{D2Kspipi} \\
+\hline 
+Event Size  &14 kB& 12 kB&14 kB& 70kB\\
+Signal Eff.\footnote{wrt truth matched cand.} &44.1(4)$\%$ &63.33(5)$\%$&76.6(8)$\%$&68.7(1)$\%$\\
+
+
+Background Eff.\footnote{wrt anti-truth matched cand.}&0.0656(4)$\%$ &0.279(3)$\%$ &1.690(6)$\%$&3.621(9)$\%$\\
+
+\hline 
+\end{tabular} 
+\end{center}
+\end{frame}
+
+\begin{frame}{Event Size in the bandwidth division}
+\topline
+\begin{itemize}
+\item The way in which the events are saved affects the bandwidth division:
+	\begin{itemize}
+		\item The bigger the event size, the harder the MVA cut
+	\end{itemize}
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{|cccc|}
+\hline 
+$D^{+}\to K^+K^-\pi^{+}$ & $D^{+}\to K^+K^-\pi^{+}$&
+$D^{0}\to K^+K^-$ &
+$D^{0}\to K^0_S\pi^{+}\pi^{-}$\\
+\hline
+&&&\\
+14 kB/evt. & 12 kB/evt. & 14 kB/evt. & 70 kB/evt.\\
+&&&\\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{figure}
+\includegraphics[scale=0.32]{images/60MB_NO_TURBO/MinbiasRate.eps}
+\end{figure}
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\begin{figure}
+\includegraphics[scale=0.34]{images/60MB_NO_TURBO/SignalEfficiencies.eps}
+\end{figure}
+\end{column}
+\end{columns}
+
+
+
+\end{frame}
+
+\begin{frame}{Event Size in the bandwidth division}
+\topline
+\begin{itemize}
+\item The way in which the events are saved affects the bandwidth division:
+	\begin{itemize}
+		\item The bigger the event size, the harder the MVA cut
+	\end{itemize}
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{|cccc|}
+\hline 
+$D^{+}\to K^+K^-\pi^{+}$ & $D^{+}\to K^+K^-\pi^{+}$&
+$D^{0}\to K^+K^-$ &
+$D^{0}\to K^0_S\pi^{+}\pi^{-}$\\
+\hline
+&&&\\
+14 kB/evt. & 12 kB/evt. & 14 kB/evt. & 14 kB/evt.\\
+&&&\\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{figure}
+\includegraphics[scale=0.32]{images/60MB_TURBO/MinbiasRate.eps}
+\end{figure}
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\begin{figure}
+\includegraphics[scale=0.34]{images/60MB_TURBO/SignalEfficiencies.eps}
+\end{figure}
+\end{column}
+\end{columns}
+
+
+
+\end{frame}
+
+\begin{frame}{Preselections}
+\topline
+\begin{itemize}
+\item[]{}
+\item Kinematical Cuts, Track quality, Vertex quality, Ghost Probability, and a loose Mass Window on the candidates
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{|c|cccc|}
+\hline 
+&\textbf{D2KKpi}& \textbf{D2KK} &\textbf{D2KKpipi} & \textbf{D2Kspipi} \\
+\hline 
+\tiny Processed events  & 92704&103163&93581&102468\\
+\tiny Reco. Candidates &2953517&231261&406361&345262\\
+\hline
+\tiny Truth matched cand. &13255&11130&2299&1174\\
+\tiny Truth matched and preselected cand. &5887&7049&1762&806\\
+\hline
+\tiny Signal Efficiency \footnote{wrt truth matched cand.}&44.1(4)$\%$ &63.33(5)$\%$&76.6(8)$\%$&68.7(1)$\%$\\
+\tiny Background Efficiency \footnote{wrt anti-truth matched cand.}&0.0656(4)$\%$ &0.279(3)$\%$ &1.690(6)$\%$&3.621(9)$\%$\\
+\hline
+
+\end{tabular} 
+
+\begin{itemize}
+\item Big difference on the number of reco. candidates with respect to the number of events in the D2KKpi channel: there is no $\Delta_m$ cut (No $D^{*}$ decay)
+\end{itemize}
+\end{center}
+
+\end{frame}
+
+\begin{frame}{PreSelection on the Minbias events}
+\topline
+\begin{center}
+\begin{tabular}{|c|cccc|}
+\hline 
+&\textbf{D2KKpi}& \textbf{D2KK} &\textbf{D2KKpipi} & \textbf{D2Kspipi}\\
+\hline 
+\tiny Processed events  &2984550&2963306&2954144&2963773\\
+\tiny Reco. Candidates &45044857&2927035&4709605&4085688\\
+\hline
+\tiny Anti-Truth matched cand. &45039035&2926918&4709569&4085532\\
+\tiny Anti-Truth matched and preselected cand. &29552&8190&79581&147950\\
+\hline
+\hline
+\end{tabular} 
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Preselections}
+\topline
+\begin{itemize}
+\item \textbf{D2KKpi}
+\end{itemize}
+
+\begin{verbatim}
+[				   '(cand_M > 1700)',
+				   '(cand_M < 2100)',
+				   '((dau1_PT + dau2_PT + dau3_PT) > 3000)', 
+				   '(TMath::ACos(cand_LOKI_BPVDIRA) < 0.010)',
+				   '(cand_LOKI_BPVLTIME > 0.0004)',
+				   '(dau1_PT > 250)',
+				   '(dau3_PT > 250)',
+				   '(dau1_TRACK_CHI2NDOF < 6.0)',
+				   '(dau2_TRACK_CHI2NDOF < 6.0)',
+				   '(dau3_TRACK_CHI2NDOF < 6.0)',
+				   '(dau1_LOKI_MIPCHI2DV_PRIMARY > 4.0)',
+				   '(dau2_LOKI_MIPCHI2DV_PRIMARY > 4.0)',
+				   '(dau1_TRACK_GhostProb<0.4)', 
+				   '(dau2_TRACK_GhostProb<0.4)',
+				   '(dau3_TRACK_GhostProb<0.4)',
+				   '(cand_LOKI_VFASPF_VCHI2VDOF < 6.)']
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Preselections}
+\topline
+\begin{itemize}
+\item \textbf{D2KK}
+\end{itemize}
+
+\begin{verbatim}
+						   ['(TMath::ACos(dau1_LOKI_BPVDIRA) < 0.0173)', 
+						   '(dau1_LOKI_BPVVDCHI2 > 25.0)',
+						   '(dau1_PT > 1000.)',
+						   '(dau1_LOKI_VFASPF_VCHI2VDOF < 10.)',
+						   '(Ddau1_LOKI_MIPCHI2DV_PRIMARY > 4.0)',
+						   '(Ddau2_LOKI_MIPCHI2DV_PRIMARY > 4.0)',
+ 						   '(Ddau1_PT > 500.)',
+						   '(Ddau2_PT > 500.)',
+						   '(Ddau1_P  > 5000.)', 
+						   '(Ddau2_P  > 5000.)', 
+						   '(Ddau1_TRACK_CHI2NDOF < 3.0)',
+						   '(Ddau2_TRACK_CHI2NDOF < 3.0)',
+					           '(Ddau1_TRACK_GhostProb<0.4)', 
+						   '(Ddau2_TRACK_GhostProb<0.4)',
+						   '(dau1_LOKI_VFASPF_VCHI2VDOF < 10.0)']
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Preselections}
+\topline
+\begin{itemize}
+\item \textbf{D2KKpi}
+\end{itemize}
+
+\begin{verbatim}
+[				   '(cand_M > 1700)',
+				   '(cand_M < 2100)',
+				   '((dau1_PT + dau2_PT + dau3_PT) > 3000)', 
+				   '(TMath::ACos(cand_LOKI_BPVDIRA) < 0.010)',
+				   '(cand_LOKI_BPVLTIME > 0.0004)',
+				   '(dau1_PT > 250)',
+				   '(dau3_PT > 250)',
+				   '(dau1_TRACK_CHI2NDOF < 6.0)',
+				   '(dau2_TRACK_CHI2NDOF < 6.0)',
+				   '(dau3_TRACK_CHI2NDOF < 6.0)',
+				   '(dau1_LOKI_MIPCHI2DV_PRIMARY > 4.0)',
+				   '(dau2_LOKI_MIPCHI2DV_PRIMARY > 4.0)',
+				   '(dau1_TRACK_GhostProb<0.4)', 
+				   '(dau2_TRACK_GhostProb<0.4)',
+				   '(dau3_TRACK_GhostProb<0.4)',
+				   '(cand_LOKI_VFASPF_VCHI2VDOF < 6.)']
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Preselections}
+\topline
+\begin{itemize}
+\item \textbf{D2KKpipi}
+\end{itemize}
+
+\begin{Verbatim}[fontsize=\small]
+				['(Ddau1_PT > 250.)',
+						   '(Ddau2_PT > 250.)',
+						   '(Ddau3_PT > 250.)',
+						   '(Ddau4_PT > 250.)',
+	            '((Ddau1_PT + Ddau2_PT + Ddau3_PT + Ddau4_PT ) > 1800.)',
+						   '(Ddau1_LOKI_MIPCHI2DV_PRIMARY > 3)',
+						   '(Ddau2_LOKI_MIPCHI2DV_PRIMARY > 3)',
+						   '(Ddau3_LOKI_MIPCHI2DV_PRIMARY > 3)',
+		                                   '(Ddau4_LOKI_MIPCHI2DV_PRIMARY > 3)',
+						   '(Ddau1_TRACK_GhostProb <0.4)',
+						   '(Ddau2_TRACK_GhostProb <0.4)',
+						   '(Ddau3_TRACK_GhostProb <0.4)',
+						   '(Ddau4_TRACK_GhostProb <0.4)',
+						   '(dau1_M > 1700.)',
+						   '(dau1_M < 2100.)',
+						   '(dau1_LOKI_VFASPF_VCHI2VDOF < 12.0)',
+						  '(TMath::ACos(dau1_LOKI_BPVDIRA < 0.20))',
+						   '(dau1_LOKI_BPVLTIME > 0.0001)',
+						   '(dau1_PT > 2000.)',
+						   '(dau1_LOKI_BPVVDCHI2 > 25.)']
+	
+\end{Verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Preselections}
+\topline
+\begin{itemize}
+\item \textbf{D2KKpi}
+\end{itemize}
+
+\begin{verbatim}
+[				   '(cand_M > 1700)',
+				   '(cand_M < 2100)',
+				   '((dau1_PT + dau2_PT + dau3_PT) > 3000)', 
+				   '(TMath::ACos(cand_LOKI_BPVDIRA) < 0.010)',
+				   '(cand_LOKI_BPVLTIME > 0.0004)',
+				   '(dau1_PT > 250)',
+				   '(dau3_PT > 250)',
+				   '(dau1_TRACK_CHI2NDOF < 6.0)',
+				   '(dau2_TRACK_CHI2NDOF < 6.0)',
+				   '(dau3_TRACK_CHI2NDOF < 6.0)',
+				   '(dau1_LOKI_MIPCHI2DV_PRIMARY > 4.0)',
+				   '(dau2_LOKI_MIPCHI2DV_PRIMARY > 4.0)',
+				   '(dau1_TRACK_GhostProb<0.4)', 
+				   '(dau2_TRACK_GhostProb<0.4)',
+				   '(dau3_TRACK_GhostProb<0.4)',
+				   '(cand_LOKI_VFASPF_VCHI2VDOF < 6.)']
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Preselections}
+\begin{itemize}
+\item \textbf{D2Kspipi}
+\end{itemize}
+
+\begin{verbatim}
+		['(dau1_M > 1700)',
+						   '(dau1_M < 2100)',
+						   '((Ddau1_PT + Ddau2_PT + Ddau3_PT) > 1500)',
+						   '(dau1_PT > 1800. )',
+						   '(TMath::ACos(dau1_LOKI_BPVDIRA) < 0.0346)',
+						   '(dau1_LOKI_BPVVDCHI2 > 20.0)',
+						   '(dau1_LOKI_VFASPF_VCHI2VDOF < 20.)',
+						   '(dau1_LOKI_BPVLTIME > 0.0001 )', #ns
+						   '(Ddau1_PT > 250.)',
+						   '(Ddau2_PT > 250.)',
+						   '(Ddau3_PT > 250.)',
+						   '(Ddau1_LOKI_MIPCHI2DV_PRIMARY > 3.)',
+					           '(Ddau2_LOKI_MIPCHI2DV_PRIMARY > 3.)',
+						   '(Ddau3_LOKI_MIPCHI2DV_PRIMARY > 3.)',
+						   '(Ddau2_TRACK_GhostProb < 0.4)',
+						   '(Ddau3_TRACK_GhostProb < 0.4)']
+				  
+\end{verbatim}
+\end{frame}
+
+\begin{frame}{Projection Plots: Bandwidth}
+\topline
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{figure}
+\caption{D2KSpipi NON Turbo}
+\includegraphics[scale=0.3]{images/projection_plots/NO_TURBO/Bandwidth.eps}
+\end{figure}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{figure}
+\caption{D2KSpipi Turbo}
+\includegraphics[scale=0.3]{images/projection_plots/TURBO/Bandwidth.eps}
+\end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Projection Plots: max Bandwidth}
+\topline
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{figure}
+\caption{D2KSpipi NON Turbo}
+\includegraphics[scale=0.3]{images/projection_plots/NO_TURBO/max_Bandwidth.eps}
+\end{figure}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{figure}
+\caption{D2KSpipi Turbo}
+\includegraphics[scale=0.3]{images/projection_plots/TURBO/max_Bandwidth.eps}
+\end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Projection Plots: Retention}
+\topline
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{figure}
+\caption{D2KSpipi NON Turbo}
+\includegraphics[scale=0.3]{images/projection_plots/NO_TURBO/Minbias_Retention.eps}
+\end{figure}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{figure}
+\caption{D2KSpipi Turbo}
+\includegraphics[scale=0.3]{images/projection_plots/TURBO/Minbias_Retention.eps}
+\end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Projection Plots: max Retention}
+\topline
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{figure}
+\caption{D2KSpipi NON Turbo}
+\includegraphics[scale=0.3]{images/projection_plots/NO_TURBO/max_Minbias_Retention.eps}
+\end{figure}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{figure}
+\caption{D2KSpipi Turbo}
+\includegraphics[scale=0.3]{images/projection_plots/TURBO/max_Minbias_Retention.eps}
+\end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Projection Plots: max Rate}
+\topline
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{figure}
+\caption{D2KSpipi NON Turbo}
+\includegraphics[scale=0.3]{images/projection_plots/NO_TURBO/max_Rate.eps}
+\end{figure}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{figure}
+\caption{D2KSpipi Turbo}
+\includegraphics[scale=0.3]{images/projection_plots/TURBO/max_Rate.eps}
+\end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Projection Plots: max Signal Efficiency}
+\topline
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{figure}
+\caption{D2KSpipi NON Turbo}
+\includegraphics[scale=0.3]{images/projection_plots/NO_TURBO/max_Signal_Eff.eps}
+\end{figure}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{figure}
+\caption{D2KSpipi Turbo}
+\includegraphics[scale=0.3]{images/projection_plots/TURBO/max_Signal_Eff.eps}
+\end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Projection Plots: MVA Signal Efficiency}
+\topline
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{figure}
+\caption{D2KSpipi NON Turbo}
+\includegraphics[scale=0.3]{images/projection_plots/NO_TURBO/MVA_Signal_Eff.eps}
+\end{figure}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{figure}
+\caption{D2KSpipi Turbo}
+\includegraphics[scale=0.3]{images/projection_plots/TURBO/MVA_Signal_Eff.eps}
+\end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Projection Plots: max MVA Signal Efficiency}
+\topline
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{figure}
+\caption{D2KSpipi NON Turbo}
+\includegraphics[scale=0.3]{images/projection_plots/NO_TURBO/max_MVA_Signal_Eff.eps}
+\end{figure}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{figure}
+\caption{D2KSpipi Turbo}
+\includegraphics[scale=0.3]{images/projection_plots/TURBO/max_MVA_Signal_Eff.eps}
+\end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+
+\backupend
+
+\end{document}
